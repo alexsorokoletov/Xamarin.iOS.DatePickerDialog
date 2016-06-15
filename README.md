@@ -17,3 +17,6 @@ There are 3 modes supported:
 `UIDatePickerMode.Time`
 `UIDatePickerMode.Date`
 `UIDatePickerMode.DateAndTime`
+
+<img src="Screenshots/xamarin-datepicker-dialog.gif" 
+title="Xamarin iOS C# port of https://github.com/squimer/DatePickerDialog-iOS-Swift demo" alt="Xamarin iOS C# port of https://github.com/squimer/DatePickerDialog-iOS-Swift demo" width="221">
