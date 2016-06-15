@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <version>1.0.0</version>
+    <authors>Alexandr Sorokoletov</authors>
+    <owners>Alexandr Sorokoletov</owners>
+    <licenseUrl>https://github.com/alexsorokoletov/Xamarin.iOS.DatePickerDialog/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/alexsorokoletov/Xamarin.iOS.DatePickerDialog</projectUrl>
+    <id>Xamarin.iOS.DatePickerDialog</id>
+    <title>Xamarin.iOS.DatePickerDialog port of https://github.com/squimer/DatePickerDialog-iOS-Swift</title>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>DatePickerDialog is an iOS class that displays an UIDatePicker within an UIAlertView.</description>
+    <summary>DatePickerDialog is an iOS class that displays an UIDatePicker within an UIAlertView.</summary>
+    <copyright>Copyright Alexandr Sorokoletov © 2016</copyright>
+  </metadata>
+  <files>
+    <file src="DT.iOS.DatePickerDialog/bin/Release/*.dll" target="lib\Xamarin.iOS10" />
+  </files>
+</package>

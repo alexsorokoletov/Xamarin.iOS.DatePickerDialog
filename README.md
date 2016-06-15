@@ -3,6 +3,9 @@ Xamarin iOS C# port of https://github.com/squimer/DatePickerDialog-iOS-Swift
 
 ## How to use
 
+Install Nuget 
+`Install-Package Xamarin.iOS.DatePickerDialog`
+
 ```
 var startingTime = DateTime.Now;
 var dialog = new DatePickerDialog();
