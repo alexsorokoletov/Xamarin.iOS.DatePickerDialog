@@ -1,4 +1,6 @@
 # Xamarin.iOS.DatePickerDialog
+[![NuGet Badge](https://buildstats.info/nuget/Xamarin.iOS.DatePickerDialog)](https://www.nuget.org/packages/Xamarin.iOS.DatePickerDialog/)
+
 Xamarin iOS C# port of https://github.com/squimer/DatePickerDialog-iOS-Swift
 
 ## How to use
