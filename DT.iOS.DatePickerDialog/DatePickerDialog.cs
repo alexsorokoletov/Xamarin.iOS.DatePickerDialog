@@ -28,6 +28,8 @@ namespace DT.iOS.DatePickerDialog
         private String _doneButtonTitle;
         private String _cancelButtonTitle;
         private DateTime _defaultDate;
+        private DateTime? _maximumDate;
+        private DateTime? _minimumDate;
         private UIDatePickerMode _datePickerMode;
         private Action<DateTime> _callback;
 
@@ -36,12 +38,17 @@ namespace DT.iOS.DatePickerDialog
         {
         }
 
+        public void Show(String title, Action<DateTime> callback, DateTime maximumDate, DateTime minimumDate)
+        {
+            Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: UIDatePickerMode.DateAndTime, callback: callback, defaultDate: DateTime.Now, maximumDate: maximumDate,minimumDate: minimumDate);
+        }
+
         public void Show(String title, Action<DateTime> callback, UIDatePickerMode datePickerMode = UIDatePickerMode.DateAndTime)
         {
             Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: datePickerMode, callback: callback, defaultDate: DateTime.Now);
         }
 
-        public void Show(string title, string doneButtonTitle, string cancelButtonTitle, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate)
+        public void Show(string title, string doneButtonTitle, string cancelButtonTitle, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate, DateTime? maximumDate=null, DateTime? minimumDate= null)
         {
 
             _title = title;
@@ -50,6 +57,8 @@ namespace DT.iOS.DatePickerDialog
             _datePickerMode = datePickerMode;
             _callback = callback;
             _defaultDate = defaultDate;
+            _maximumDate = maximumDate;
+            _minimumDate = minimumDate;
 
             _dialogView = createContainerView();
 
@@ -177,6 +186,13 @@ namespace DT.iOS.DatePickerDialog
             _datePicker.Frame = new CGRect(_datePicker.Frame.Location, new CGSize(300, _datePicker.Frame.Size.Height));
             _datePicker.Mode = _datePickerMode;
             _datePicker.Date = (NSDate)_defaultDate;
+
+            if (_maximumDate.HasValue)
+                _datePicker.MaximumDate = (NSDate)_maximumDate.Value;
+
+            if (_minimumDate.HasValue)
+                _datePicker.MinimumDate = (NSDate)_minimumDate.Value;
+
             dialogContainer.AddSubview(_datePicker);
             AddButtonsToView(dialogContainer);
             return dialogContainer;

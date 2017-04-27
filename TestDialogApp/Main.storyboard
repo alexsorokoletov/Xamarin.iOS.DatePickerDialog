@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="NO" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="iOS"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -42,15 +44,24 @@
                                     <action selector="DatePickerClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Ek-Ip-JuU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                                <rect key="frame" x="188" y="239" width="238" height="30"/>
+                                <state key="normal" title="Date picker with range"/>
+                                <connections>
+                                    <action selector="DatePickerWithDateRange:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eae-gT-nH8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="26" id="54C-L7-OAM"/>
                             <constraint firstItem="khP-pX-dMY" firstAttribute="top" secondItem="eae-gT-nH8" secondAttribute="bottom" constant="32" id="G2A-XJ-95q"/>
                             <constraint firstItem="YOw-Lf-xXu" firstAttribute="top" secondItem="ooL-iy-dP8" secondAttribute="bottom" constant="15" id="GPO-z2-wkn"/>
+                            <constraint firstItem="3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OHk-pP-yAj"/>
                             <constraint firstItem="ooL-iy-dP8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R6E-1S-GbW"/>
                             <constraint firstItem="ooL-iy-dP8" firstAttribute="top" secondItem="khP-pX-dMY" secondAttribute="bottom" constant="26" id="SDG-MS-uVa"/>
                             <constraint firstItem="YOw-Lf-xXu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d1b-Yb-uHg"/>
+                            <constraint firstItem="3" firstAttribute="top" secondItem="YOw-Lf-xXu" secondAttribute="bottom" constant="15" id="efn-lq-KLx"/>
                             <constraint firstItem="khP-pX-dMY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ffM-ZD-Dor"/>
                             <constraint firstItem="eae-gT-nH8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wuP-DI-TlX"/>
                         </constraints>
@@ -62,6 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
     </scenes>
 </document>
