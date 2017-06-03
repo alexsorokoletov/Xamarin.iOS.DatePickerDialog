@@ -36,9 +36,9 @@ namespace TestDialogApp
             var startingTime = DateTime.Now;
             var dialog = new DatePickerDialog();
             dialog.Show("Choose time", (dt) =>
-                {
-                    TimePickLabel.Text = dt.ToString();
-            },DateTime.Now.AddDays(10), DateTime.Now.AddDays(-10));
+            {
+                TimePickLabel.Text = dt.ToString();
+            }, DateTime.Now, DateTime.Now.AddDays(1));
         }
     }
 }
