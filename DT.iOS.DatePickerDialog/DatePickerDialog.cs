@@ -38,14 +38,14 @@ namespace DT.iOS.DatePickerDialog
 		{
 		}
 
-		public void Show(String title, Action<DateTime> callback, DateTime minimumDate, DateTime maximumDate)
+		public void Show(String title, Action<DateTime> callback, DateTime minimumDate, DateTime maximumDate, Action cancelCallback = null)
 		{
-			Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: UIDatePickerMode.DateAndTime, callback: callback, defaultDate: DateTime.Now, maximumDate: maximumDate, minimumDate: minimumDate);
+			Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: UIDatePickerMode.DateAndTime, callback: callback, defaultDate: DateTime.Now, maximumDate: maximumDate, minimumDate: minimumDate, cancelCallback: cancelCallback);
 		}
 
-		public void Show(String title, Action<DateTime> callback, UIDatePickerMode datePickerMode = UIDatePickerMode.DateAndTime)
+		public void Show(String title, Action<DateTime> callback, UIDatePickerMode datePickerMode = UIDatePickerMode.DateAndTime, Action cancelCallback = null)
 		{
-			Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: datePickerMode, callback: callback, defaultDate: DateTime.Now);
+			Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: datePickerMode, callback: callback, defaultDate: DateTime.Now, cancelCallback: cancelCallback);
 		}
 
 		public void Show(string title, string doneButtonTitle, string cancelButtonTitle, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate, DateTime? maximumDate = null, DateTime? minimumDate = null, Action cancelCallback = null)
