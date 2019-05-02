@@ -34,7 +34,9 @@ namespace DT.iOS.DatePickerDialog
 		private Action<DateTime> _callback;
 		private Action _cancelCallback;
 
-		public DatePickerDialog()
+        private bool _isDialogShown = false; // flag to show whether dialog is opened
+
+        public DatePickerDialog()
 		{
 		}
 
@@ -50,8 +52,10 @@ namespace DT.iOS.DatePickerDialog
 
 		public void Show(string title, string doneButtonTitle, string cancelButtonTitle, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate, DateTime? maximumDate = null, DateTime? minimumDate = null, Action cancelCallback = null)
 		{
+            if (_isDialogShown) return; // if already dialog is shown, do not open another dialog
+            _isDialogShown = true; // update the flag
 
-			_title = title;
+            _title = title;
 			_doneButtonTitle = doneButtonTitle;
 			_cancelButtonTitle = cancelButtonTitle;
 			_datePickerMode = datePickerMode;
@@ -76,33 +80,10 @@ namespace DT.iOS.DatePickerDialog
 
 			AddSubview(_dialogView);
 
-			/* Attached to the top most window (make sure we are using the right orientation) */
-			var interfaceOrientation = UIApplication.SharedApplication.StatusBarOrientation;
+            var widthHeight = Frame.Width > Frame.Height ? Frame.Width : Frame.Height; // check if width is greator than width, return whever is greator
+            Frame = new CGRect(0, 0, widthHeight, widthHeight); // create overlay with max value from height and width so that on rotaion whole screen is covered
 
-			switch (interfaceOrientation)
-			{
-				case UIInterfaceOrientation.LandscapeLeft:
-					var rotationLeft = Math.PI * 270 / 180;
-					Transform = CGAffineTransform.MakeRotation((nfloat)rotationLeft);
-					break;
-
-				case UIInterfaceOrientation.LandscapeRight:
-					var rotationRight = Math.PI * 90 / 180;
-					Transform = CGAffineTransform.MakeRotation((nfloat)rotationRight);
-					break;
-
-				case UIInterfaceOrientation.PortraitUpsideDown:
-					var rotationUpsideDown = Math.PI * 180 / 180;
-					Transform = CGAffineTransform.MakeRotation((nfloat)rotationUpsideDown);
-					break;
-				default:
-					break;
-			}
-
-			Frame = new CGRect(0, 0, Frame.Width, Frame.Size.Height);
-			UIApplication.SharedApplication.Windows[0].AddSubview(this);
-
-			UIView.Animate(0.2, 0d, UIViewAnimationOptions.CurveEaseInOut, () =>
+            UIView.Animate(0.2, 0d, UIViewAnimationOptions.CurveEaseInOut, () =>
 			{
 				BackgroundColor = UIColor.Black.ColorWithAlpha(0.4f);
 				_dialogView.Layer.Opacity = 1;
@@ -113,21 +94,23 @@ namespace DT.iOS.DatePickerDialog
 
 		}
 
-		/* Helper function: count and return the screen's size */
-		private CGSize CountScreenSize()
+        /// <summary>
+        /// On removal of dialog, reset the flag that dialog is not shown
+        /// </summary>
+        /// <param name="uiview"></param>
+        public override void WillRemoveSubview(UIView uiview)
+        {
+            base.WillRemoveSubview(uiview);
+            _isDialogShown = false; // rest the flag
+        }
+
+        /* Helper function: count and return the screen's size */
+        private CGSize CountScreenSize()
 		{
-			var screenWidth = UIScreen.MainScreen.Bounds.Size.Width;
-			var screenHeight = UIScreen.MainScreen.Bounds.Size.Height;
-			var interfaceOrientaion = UIApplication.SharedApplication.StatusBarOrientation;
-			if (UIInterfaceOrientation.LandscapeLeft == interfaceOrientaion || UIInterfaceOrientation.LandscapeRight == interfaceOrientaion)
-			{
-				return new CGSize(screenHeight, screenWidth);
-			}
-			else
-			{
-				return new CGSize(screenWidth, screenHeight);
-			}
-		}
+            var screenWidth = UIScreen.MainScreen.Bounds.Size.Width;
+            var screenHeight = UIScreen.MainScreen.Bounds.Size.Height;
+            return new CGSize(screenWidth, screenHeight);
+        }
 
 		/* Creates the container view here: create the dialog, then add the custom content and buttons */
 		private UIView createContainerView()
