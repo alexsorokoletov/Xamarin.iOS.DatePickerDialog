@@ -83,6 +83,8 @@ namespace DT.iOS.DatePickerDialog
             var widthHeight = Frame.Width > Frame.Height ? Frame.Width : Frame.Height; // check if width is greator than width, return whever is greator
             Frame = new CGRect(0, 0, widthHeight, widthHeight); // create overlay with max value from height and width so that on rotaion whole screen is covered
 
+            UIApplication.SharedApplication.Windows[0].AddSubview(this);
+
             UIView.Animate(0.2, 0d, UIViewAnimationOptions.CurveEaseInOut, () =>
 			{
 				BackgroundColor = UIColor.Black.ColorWithAlpha(0.4f);
