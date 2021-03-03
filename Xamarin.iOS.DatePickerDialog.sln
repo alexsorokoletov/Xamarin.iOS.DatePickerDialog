@@ -1,9 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDialogApp", "TestDialogApp\TestDialogApp.csproj", "{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DT.iOS.DatePickerDialog", "DT.iOS.DatePickerDialog\DT.iOS.DatePickerDialog.csproj", "{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDialogApp", "TestDialogApp\TestDialogApp.csproj", "{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,6 @@ Global
 		Debug|iPhone = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Release|iPhone.ActiveCfg = Release|iPhone
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Release|iPhone.Build.0 = Release|iPhone
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{F35B9572-1A06-4D9C-95D9-F1F65E3B66AB}.Debug|iPhone.Build.0 = Debug|iPhone
 		{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}.Release|iPhone.ActiveCfg = Release|Any CPU
@@ -29,36 +21,23 @@ Global
 		{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{101FD7D0-DDBA-4E22-8E7E-82D7A499F56E}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Release|iPhone.ActiveCfg = Release|iPhone
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Release|iPhone.Build.0 = Release|iPhone
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{4FDF94C1-74AD-4EB9-8592-EF98CE5606B5}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.TextStylePolicy = $1
-		$1.inheritsSet = VisualStudio
-		$1.inheritsScope = text/plain
 		$1.scope = text/x-csharp
+		$1.FileWidth = 80
+		$1.TabsToSpaces = True
 		$0.CSharpFormattingPolicy = $2
-		$2.IndentSwitchSection = True
-		$2.NewLinesForBracesInProperties = True
-		$2.NewLinesForBracesInAccessors = True
-		$2.NewLinesForBracesInAnonymousMethods = True
-		$2.NewLinesForBracesInControlBlocks = True
-		$2.NewLinesForBracesInAnonymousTypes = True
-		$2.NewLinesForBracesInObjectCollectionArrayInitializers = True
-		$2.NewLinesForBracesInLambdaExpressionBody = True
-		$2.NewLineForElse = True
-		$2.NewLineForCatch = True
-		$2.NewLineForFinally = True
-		$2.NewLineForMembersInObjectInit = True
-		$2.NewLineForMembersInAnonymousTypes = True
-		$2.NewLineForClausesInQuery = True
-		$2.SpacingAfterMethodDeclarationName = False
-		$2.SpaceAfterMethodCallName = False
-		$2.SpaceBeforeOpenSquareBracket = False
-		$2.inheritsSet = Mono
-		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
 		$0.StandardHeader = $3
-		$3.Text = 
-		$3.IncludeInNewFiles = True
 	EndGlobalSection
 EndGlobal
