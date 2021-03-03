@@ -78,6 +78,11 @@ namespace DT.iOS.DatePickerDialog
 
 			BackgroundColor = UIColor.FromRGBA(0, 0, 0, 0);
 
+			if (UIDevice.CurrentDevice.CheckSystemVersion(14, 0))
+			{
+				_datePicker.PreferredDatePickerStyle = UIDatePickerStyle.Wheels;
+			}
+
 			AddSubview(_dialogView);
 
             var widthHeight = Frame.Width > Frame.Height ? Frame.Width : Frame.Height; // check if width is greator than width, return whever is greator
