@@ -1,14 +1,14 @@
-﻿using System;
-using DT.iOS.DatePickerDialog;
+﻿using DT.iOS.DatePickerDialog;
+using Foundation;
+using System;
 using UIKit;
 
 namespace TestDialogApp
 {
     public partial class ViewController : UIViewController
     {
-        protected ViewController(IntPtr handle) : base(handle)
+        public ViewController(IntPtr handle) : base(handle)
         {
-            // Note: this .ctor should not contain any initialization logic.
         }
 
         partial void DatePickerClicked(Foundation.NSObject sender)
@@ -16,9 +16,19 @@ namespace TestDialogApp
             var startingTime = DateTime.Now;
             var dialog = new DatePickerDialog();
             dialog.Show("Choose date", "Done", "Cancel", UIDatePickerMode.Date, (dt) =>
-                {
-                    DatePickLabel.Text = dt.ToString();
-                }, startingTime);
+            {
+                TimePickerText.Text = $"Value selected: ${dt}";
+            }, startingTime);
+        }
+
+        partial void DateWithRangeClicked(Foundation.NSObject sender)
+        {
+            var startingTime = DateTime.Now;
+            var dialog = new DatePickerDialog();
+            dialog.Show("Choose date this week", (dt) =>
+            {
+                TimePickerText.Text = $"Value selected: ${dt}";
+            }, DateTime.Now, DateTime.Now.AddDays(7));
         }
 
         partial void TimePickerClicked(Foundation.NSObject sender)
@@ -26,20 +36,9 @@ namespace TestDialogApp
             var startingTime = DateTime.Now;
             var dialog = new DatePickerDialog();
             dialog.Show("Choose time", "Done", "Cancel", UIDatePickerMode.Time, (dt) =>
-                {
-                    TimePickLabel.Text = dt.ToString();
-                }, startingTime);
-        }
-
-        partial void DatePickerWithDateRange(UIButton sender)
-        {
-            var startingTime = DateTime.Now;
-            var dialog = new DatePickerDialog();
-            dialog.Show("Choose time", (dt) =>
             {
-                TimePickLabel.Text = dt.ToString();
-            }, DateTime.Now, DateTime.Now.AddDays(1));
+                TimePickerText.Text = $"Value selected: ${dt}";
+            }, startingTime);
         }
     }
 }
-

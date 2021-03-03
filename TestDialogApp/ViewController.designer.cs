@@ -1,48 +1,35 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Visual Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
 
 namespace TestDialogApp
 {
-    [Register ("ViewController")]
-    partial class ViewController
-    {
-        [Outlet]
-        UIKit.UILabel DatePickLabel { get; set; }
+	[Register ("ViewController")]
+	partial class ViewController
+	{
+		[Outlet]
+		UIKit.UILabel TimePickerText { get; set; }
 
+		[Action ("DatePickerClicked:")]
+		partial void DatePickerClicked (Foundation.NSObject sender);
 
-        [Outlet]
-        UIKit.UILabel TimePickLabel { get; set; }
+		[Action ("DateWithRangeClicked:")]
+		partial void DateWithRangeClicked (Foundation.NSObject sender);
 
-
-        [Action ("DatePickerClicked:")]
-        partial void DatePickerClicked (Foundation.NSObject sender);
-
-
-        [Action ("TimePickerClicked:")]
-        partial void TimePickerClicked (Foundation.NSObject sender);
-
-        [Action ("DatePickerWithDateRange:")]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        partial void DatePickerWithDateRange (UIKit.UIButton sender);
-
-        void ReleaseDesignerOutlets ()
-        {
-            if (DatePickLabel != null) {
-                DatePickLabel.Dispose ();
-                DatePickLabel = null;
-            }
-
-            if (TimePickLabel != null) {
-                TimePickLabel.Dispose ();
-                TimePickLabel = null;
-            }
-        }
-    }
+		[Action ("TimePickerClicked:")]
+		partial void TimePickerClicked (Foundation.NSObject sender);
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (TimePickerText != null) {
+				TimePickerText.Dispose ();
+				TimePickerText = null;
+			}
+		}
+	}
 }
