@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <authors>Alexandr Sorokoletov</authors>
     <owners>Alexandr Sorokoletov</owners>
     <license type="expression">MIT</license>
@@ -10,10 +10,15 @@
     <title>Xamarin.iOS.DatePickerDialog port of https://github.com/squimer/DatePickerDialog-iOS-Swift</title>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>DatePickerDialog is an iOS class that displays an UIDatePicker within an UIAlertView.</description>
-    <summary>DatePickerDialog is an iOS class that displays an UIDatePicker within an UIAlertView.</summary>
-    <copyright>Copyright Alexandr Sorokoletov © 2019</copyright>
+    <copyright>Copyright Alexandr Sorokoletov © 2021</copyright>
+    <releaseNotes>
+      - update code based on latest master of the Swift source repo
+      - support for dark themes and rotation (iPhone, iPad)
+      - fix for iOS 14
+    </releaseNotes>
   </metadata>
   <files>
     <file src="DT.iOS.DatePickerDialog/bin/Release/*.dll" target="lib\Xamarin.iOS10" />
+    <file src="DT.iOS.DatePickerDialog/bin/Release/*.pdb" target="lib\Xamarin.iOS10" />
   </files>
 </package>
