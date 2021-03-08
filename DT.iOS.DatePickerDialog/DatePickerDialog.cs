@@ -12,6 +12,8 @@ namespace DT.iOS.DatePickerDialog
     public class DatePickerDialog : UIView
     {
         /* Consts */
+        private const string kDone = "Done";
+        private const string kCancel = "Done";
         private const float kDefaultButtonHeight = 50;
         private const float kDefaultButtonSpacerHeight = 1;
         private const float kCornerRadius = 7;
@@ -30,6 +32,7 @@ namespace DT.iOS.DatePickerDialog
         private Action<DateTime>? _callback;
         private Action? _cancelCallback;
         private bool _showCancelButton = false;
+        private readonly bool _useLocalizedButtons;
         private NSLocale? _locale;
         private UIColor _textColor;
         private UIColor _buttonColor;
@@ -38,40 +41,44 @@ namespace DT.iOS.DatePickerDialog
         private NSObject? _orientationChangeObserver;
 
         public DatePickerDialog(UIColor? textColor = null, UIColor? buttonColor = null, UIFont? font = null, NSLocale? locale = null,
-            bool showCancelButton = true)
+            bool showCancelButton = true, bool useLocalizedButtons = false)
         {
             _textColor = textColor ?? Colors.Text();
             _buttonColor = buttonColor ?? Colors.Accent();
             _font = font ?? UIFont.BoldSystemFontOfSize(15);
             _showCancelButton = showCancelButton;
+            _useLocalizedButtons = useLocalizedButtons;
             _locale = locale;
             SetupView();
         }
 
         public void Show(string title, Action<DateTime> callback, DateTime minimumDate, DateTime maximumDate, Action? cancelCallback = null)
-        {
-            Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: UIDatePickerMode.DateAndTime, callback: callback, defaultDate: DateTime.Now, maximumDate: maximumDate, minimumDate: minimumDate, cancelCallback: cancelCallback);
-        }
+            => Show(title, doneButtonTitle: kDone, cancelButtonTitle: kCancel, datePickerMode: UIDatePickerMode.DateAndTime, callback: callback, defaultDate: DateTime.Now, maximumDate: maximumDate, minimumDate: minimumDate, cancelCallback: cancelCallback);
 
         public void Show(string title, Action<DateTime> callback, UIDatePickerMode datePickerMode = UIDatePickerMode.DateAndTime, Action? cancelCallback = null)
-        {
-            Show(title, doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: datePickerMode, callback: callback, defaultDate: DateTime.Now, cancelCallback: cancelCallback);
-        }
+            => Show(title, doneButtonTitle: kDone, cancelButtonTitle: kCancel, datePickerMode: datePickerMode, callback: callback, defaultDate: DateTime.Now, cancelCallback: cancelCallback);
+
+        public void Show(string title, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate, DateTime? maximumDate = null, DateTime? minimumDate = null, Action? cancelCallback = null)
+            => Show(title, kDone, kCancel, datePickerMode, callback, defaultDate, maximumDate, minimumDate, cancelCallback);
 
         public void Show(string title, string doneButtonTitle, string cancelButtonTitle,
             UIDatePickerMode datePickerMode,
             Action<DateTime> callback,
-            DateTime defaultDate, DateTime? maximumDate = null,
-            DateTime? minimumDate = null,
+            DateTime defaultDate,
+            DateTime? maximumDate = null, DateTime? minimumDate = null,
             Action? cancelCallback = null)
         {
 
-            _titleLabel!.Text = title;
-            _doneButton!.SetTitle(doneButtonTitle, UIControlState.Normal);
-            if (_showCancelButton)
+            if(!_useLocalizedButtons)
             {
-                _cancelButton!.SetTitle(cancelButtonTitle, UIControlState.Normal);
+                _titleLabel!.Text = title;
+                _doneButton!.SetTitle(doneButtonTitle, UIControlState.Normal);
+                if (_showCancelButton)
+                {
+                    _cancelButton!.SetTitle(cancelButtonTitle, UIControlState.Normal);
+                }
             }
+
             _datePickerMode = datePickerMode;
             _callback = callback;
             _cancelCallback = cancelCallback;
@@ -192,8 +199,13 @@ namespace DT.iOS.DatePickerDialog
 
         private void ButtonTapped(object sender, EventArgs e)
         {
-            var button = sender as UIButton;
-            if (button?.Tag == kDoneButtonTag)
+            nint tag = 0;
+            if (sender is UIButton uiButton)
+                tag = uiButton.Tag;
+            else if (sender is UIBarButtonItem barButton)
+                tag = barButton.Tag;
+
+            if (tag == kDoneButtonTag)
             {
                 var utcDate = (DateTime)_datePicker!.Date;
                 var local = new DateTime(utcDate.Ticks, DateTimeKind.Utc).ToLocalTime();
@@ -208,6 +220,12 @@ namespace DT.iOS.DatePickerDialog
 
         private void AddButtonsToView(UIView container)
         {
+            if(_useLocalizedButtons)
+            {
+                AddBarButtonsToView(container);
+                return;
+            }
+
             var buttonWidth = container.Bounds.Size.Width / 2;
 
             var leftButtonFrame = new CGRect(
@@ -239,7 +257,7 @@ namespace DT.iOS.DatePickerDialog
 
             if (_showCancelButton)
             {
-                _cancelButton = new UIButton(UIButtonType.System)
+                _cancelButton =  new UIButton(UIButtonType.System)
                 {
                     Frame = isLTR ? leftButtonFrame : rightButtonFrame
                 };
@@ -267,6 +285,46 @@ namespace DT.iOS.DatePickerDialog
             _doneButton.Layer.CornerRadius = kCornerRadius;
             _doneButton.TouchUpInside += ButtonTapped;
             container.AddSubview(_doneButton);
+        }
+
+
+        private void AddBarButtonsToView(UIView container)
+        {
+            var width = container.Bounds.Size.Width;
+
+            var toolbar = new UIToolbar(new CGRect(
+                0,
+                container.Bounds.Size.Height - kDefaultButtonHeight,
+                width,
+                kDefaultButtonHeight))
+            {
+                Translucent = true,
+                Opaque = false,
+                BackgroundColor = UIColor.Clear,
+                
+            };
+            toolbar.SetBackgroundImage(new UIImage(), UIToolbarPosition.Any, UIBarMetrics.Default);
+            toolbar.Layer.CornerRadius = kCornerRadius;
+            toolbar.Layer.MasksToBounds = true;
+
+            var doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, ButtonTapped)
+            {
+                Tag = kDoneButtonTag
+            };
+            var cancelButton = _showCancelButton ? new UIBarButtonItem(UIBarButtonSystemItem.Cancel, ButtonTapped) : null;
+            var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            spacer.TintColor = UIColor.Red;
+
+            var interfaceLayoutDirection = UIApplication.SharedApplication.UserInterfaceLayoutDirection;
+            var isLTR = interfaceLayoutDirection == UIUserInterfaceLayoutDirection.LeftToRight;
+
+            var tolbarItems = isLTR
+                ? _showCancelButton ? new[] { spacer, cancelButton, spacer, spacer, doneButton, spacer } : new[] { spacer, doneButton, spacer }
+                : _showCancelButton ? new[] { spacer, doneButton, spacer, spacer, cancelButton, spacer } : new[] { spacer, doneButton, spacer };
+
+            toolbar.SetItems(tolbarItems, false);
+
+            container.AddSubview(toolbar);
         }
 
         private void Close()
