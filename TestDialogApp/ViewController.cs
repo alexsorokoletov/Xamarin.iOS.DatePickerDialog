@@ -14,7 +14,7 @@ namespace TestDialogApp
         partial void DatePickerClicked(Foundation.NSObject sender)
         {
             var startingTime = DateTime.Now;
-            var dialog = new DatePickerDialog();
+            var dialog = new DatePickerDialog(useLocalizedButtons: true);
             dialog.Show("Choose date", "Done", "Cancel", UIDatePickerMode.Date, (dt) =>
             {
                 TimePickerText.Text = $"Value selected: ${dt}";
