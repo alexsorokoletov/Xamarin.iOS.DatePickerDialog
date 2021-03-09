@@ -13,7 +13,7 @@ namespace DT.iOS.DatePickerDialog
     {
         /* Consts */
         private const string kDone = "Done";
-        private const string kCancel = "Done";
+        private const string kCancel = "Cancel";
         private const float kDefaultButtonHeight = 50;
         private const float kDefaultButtonSpacerHeight = 1;
         private const float kCornerRadius = 7;
@@ -69,9 +69,10 @@ namespace DT.iOS.DatePickerDialog
             Action? cancelCallback = null)
         {
 
-            if(!_useLocalizedButtons)
+            _titleLabel!.Text = title;
+
+            if (!_useLocalizedButtons)
             {
-                _titleLabel!.Text = title;
                 _doneButton!.SetTitle(doneButtonTitle, UIControlState.Normal);
                 if (_showCancelButton)
                 {
@@ -313,7 +314,6 @@ namespace DT.iOS.DatePickerDialog
             };
             var cancelButton = _showCancelButton ? new UIBarButtonItem(UIBarButtonSystemItem.Cancel, ButtonTapped) : null;
             var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
-            spacer.TintColor = UIColor.Red;
 
             var interfaceLayoutDirection = UIApplication.SharedApplication.UserInterfaceLayoutDirection;
             var isLTR = interfaceLayoutDirection == UIUserInterfaceLayoutDirection.LeftToRight;
