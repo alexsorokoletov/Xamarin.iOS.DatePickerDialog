@@ -52,21 +52,22 @@ namespace DT.iOS.DatePickerDialog
             SetupView();
         }
 
-        public void Show(string title, Action<DateTime> callback, DateTime minimumDate, DateTime maximumDate, Action? cancelCallback = null)
-            => Show(title, doneButtonTitle: kDone, cancelButtonTitle: kCancel, datePickerMode: UIDatePickerMode.DateAndTime, callback: callback, defaultDate: DateTime.Now, maximumDate: maximumDate, minimumDate: minimumDate, cancelCallback: cancelCallback);
+        public void Show(string title, Action<DateTime> callback, DateTime minimumDate, DateTime maximumDate, Action? cancelCallback = null, Func<UIView>? getCurrentView = null)
+            => Show(title, kDone, kCancel, UIDatePickerMode.DateAndTime, callback, DateTime.Now, maximumDate, minimumDate, cancelCallback, getCurrentView);
 
-        public void Show(string title, Action<DateTime> callback, UIDatePickerMode datePickerMode = UIDatePickerMode.DateAndTime, Action? cancelCallback = null)
-            => Show(title, doneButtonTitle: kDone, cancelButtonTitle: kCancel, datePickerMode: datePickerMode, callback: callback, defaultDate: DateTime.Now, cancelCallback: cancelCallback);
+        public void Show(string title, Action<DateTime> callback, UIDatePickerMode datePickerMode = UIDatePickerMode.DateAndTime, Action? cancelCallback = null, Func<UIView>? getCurrentView = null)
+            => Show(title, kDone, kCancel, datePickerMode, callback, DateTime.Now, null, null, cancelCallback, getCurrentView);
 
-        public void Show(string title, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate, DateTime? maximumDate = null, DateTime? minimumDate = null, Action? cancelCallback = null)
-            => Show(title, kDone, kCancel, datePickerMode, callback, defaultDate, maximumDate, minimumDate, cancelCallback);
+        public void Show(string title, UIDatePickerMode datePickerMode, Action<DateTime> callback, DateTime defaultDate, DateTime? maximumDate = null, DateTime? minimumDate = null, Action? cancelCallback = null, Func<UIView>? getCurrentView = null)
+            => Show(title, kDone, kCancel, datePickerMode, callback, defaultDate, maximumDate, minimumDate, cancelCallback, getCurrentView);
 
         public void Show(string title, string doneButtonTitle, string cancelButtonTitle,
             UIDatePickerMode datePickerMode,
             Action<DateTime> callback,
             DateTime defaultDate,
             DateTime? maximumDate = null, DateTime? minimumDate = null,
-            Action? cancelCallback = null)
+            Action? cancelCallback = null,
+            Func<UIView>? getCurrentView = null)
         {
 
             _titleLabel!.Text = title;
@@ -103,7 +104,10 @@ namespace DT.iOS.DatePickerDialog
                 _datePicker.PreferredDatePickerStyle = UIDatePickerStyle.Wheels;
             }
 
-            var window = UIApplication.SharedApplication.Windows.Last();
+            var window = getCurrentView == null
+                ? UIApplication.SharedApplication.Windows.Last()
+                : getCurrentView.Invoke();
+
             window.AddSubview(this);
             window.BringSubviewToFront(this);
             window.EndEditing(true);
