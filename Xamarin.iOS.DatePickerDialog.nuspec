@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <authors>Alexandr Sorokoletov</authors>
     <owners>Alexandr Sorokoletov</owners>
     <license type="expression">MIT</license>
@@ -12,6 +12,7 @@
     <description>DatePickerDialog is an iOS class that displays an UIDatePicker within an UIAlertView.</description>
     <copyright>Copyright Alexandr Sorokoletov © 2021</copyright>
     <releaseNotes>
+      - support for custom parent view setup (contribution from @dimonovdd)
       - support for automatically localized/translated buttons (contribution from @dimonovdd)
     </releaseNotes>
   </metadata>
