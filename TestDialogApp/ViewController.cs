@@ -1,7 +1,7 @@
 ﻿using DT.iOS.DatePickerDialog;
-using Foundation;
 using System;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace TestDialogApp
 {
@@ -18,7 +18,9 @@ namespace TestDialogApp
             dialog.Show("Choose date", "Done", "Cancel", UIDatePickerMode.Date, (dt) =>
             {
                 TimePickerText.Text = $"Value selected: ${dt}";
-            }, startingTime);
+            },
+            startingTime,
+            getCurrentView: () => Platform.GetCurrentUIViewController().View);
         }
 
         partial void DateWithRangeClicked(Foundation.NSObject sender)
